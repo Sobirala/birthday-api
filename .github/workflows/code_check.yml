@@ -10,7 +10,7 @@ jobs:
       - name: Install Python and dependencies
         uses: ./.github/actions/install
       - name: Run ruff and mypy
-        run: poetry run ruff bot --format github
+        run: poetry run ruff --output-format=github app
   mypy:
     runs-on: ubuntu-latest
     steps:
@@ -20,4 +20,4 @@ jobs:
       - name: Add mypy annotator
         uses: pr-annotators/mypy-pr-annotator@v1.0.0
       - name: Run mypy
-        run: poetry run mypy -p bot
+        run: poetry run mypy -p app
