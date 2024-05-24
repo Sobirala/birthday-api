@@ -1,6 +1,6 @@
-from typing import Optional, Any
+from typing import Any, Optional
 
-from sqlalchemy import func, select, ColumnOperators, BinaryExpression
+from sqlalchemy import BinaryExpression, ColumnOperators, func, select
 
 from app.models import Congratulation
 from app.repositories.base import BaseRepository
