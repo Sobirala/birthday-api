@@ -1,11 +1,13 @@
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from sqlalchemy import BigInteger, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import Language
 from app.models.base import Base, TimestampMixin
-from app.models.user import User
+
+if TYPE_CHECKING:
+    from app.models.user import User
 
 
 class Group(TimestampMixin, Base):

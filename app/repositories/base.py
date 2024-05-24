@@ -13,6 +13,7 @@ from sqlalchemy import (
     update,
 )
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm.interfaces import ORMOption
 from sqlalchemy.sql.base import ExecutableOption
 
 from app.models import Base
@@ -39,7 +40,7 @@ class BaseRepository(Generic[Model]):
         await self._session.merge(model)
         return model
 
-    async def get(self, pk: UUID, options: Optional[Sequence[ExecutableOption]] = None) -> Model | None:
+    async def get(self, pk: UUID, options: Optional[Sequence[ORMOption]] = None) -> Model | None:
         return await self._session.get(self.__model__, pk, options=options)
 
     async def update(self, *expressions: BinaryExpression[Any] | ColumnOperators, **kwargs: Any) -> Sequence[Model]:
@@ -121,4 +122,4 @@ class BaseRepository(Generic[Model]):
     async def check_exists(self, *expressions: BinaryExpression[Any]) -> bool:
         query = exists(self.__model__.id).select()
         query = self._set_filter_with_additions(query, expressions, 1)
-        return await self._session.scalar(query)
+        return await self._session.scalar(query) or False
