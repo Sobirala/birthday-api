@@ -1,4 +1,3 @@
-from typing import Optional
 
 from app.models import Group
 from app.repositories.base import BaseRepository

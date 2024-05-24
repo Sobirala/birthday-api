@@ -10,7 +10,7 @@ jobs:
       - name: Install Python and dependencies
         uses: ./.github/actions/install
       - name: Run ruff and mypy
-        run: poetry run ruff --output-format=github app
+        run: poetry run ruff check --output-format=github app
   mypy:
     runs-on: ubuntu-latest
     steps:

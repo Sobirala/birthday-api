@@ -1,4 +1,3 @@
-import datetime
 from typing import Optional, Sequence
 
 from sqlalchemy import ColumnElement, Interval, and_, func, select
@@ -6,7 +5,6 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.base import ExecutableOption
 from sqlalchemy.sql.functions import concat
 
-from app.enums import Gender
 from app.models import Group, User
 from app.repositories.base import BaseRepository
 

@@ -2,7 +2,6 @@ from typing import Optional, Any
 
 from sqlalchemy import func, select, ColumnOperators, BinaryExpression
 
-from app.enums import Language
 from app.models import Congratulation
 from app.repositories.base import BaseRepository
 
