@@ -16,7 +16,7 @@ class BaseModel(DeclarativeBase):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         class_name = self.__class__.__name__
         attribs = ", ".join(
             [
