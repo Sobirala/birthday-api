@@ -2,14 +2,14 @@ from typing import Any, Optional
 
 from sqlalchemy import BinaryExpression, ColumnOperators, func, select
 
-from app.models import Congratulation
+from app.models import CongratulationModel
 from app.repositories.base import BaseRepository
 
 
-class CongratulationRepository(BaseRepository[Congratulation]):
-    __model__ = Congratulation
+class CongratulationRepository(BaseRepository[CongratulationModel]):
+    __model__ = CongratulationModel
 
-    async def random(self, *expressions: BinaryExpression[Any] | ColumnOperators) -> Optional[Congratulation]:
+    async def random(self, *expressions: BinaryExpression[Any] | ColumnOperators) -> Optional[CongratulationModel]:
         query = select(self.__model__).order_by(func.random())
 
         query = self._set_filter(query, expressions)

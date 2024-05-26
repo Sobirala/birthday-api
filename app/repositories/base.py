@@ -16,9 +16,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm.interfaces import ORMOption
 from sqlalchemy.sql.base import ExecutableOption
 
-from app.models import Base
+from app.models import BaseModel
 
-Model = TypeVar('Model', bound=Base)
+Model = TypeVar('Model', bound=BaseModel)
 
 
 class BaseRepository(Generic[Model]):
