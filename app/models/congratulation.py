@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.enums import Language
-from app.models.base import Base, TimestampMixin
+from app.models.base import BaseModel, TimestampMixin
 
 
-class Congratulation(TimestampMixin, Base):
+class CongratulationModel(TimestampMixin, BaseModel):
     __tablename__ = "congratulations"
 
     photo_file_id: Mapped[str]

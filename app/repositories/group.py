@@ -1,7 +1,6 @@
-
-from app.models import Group
+from app.models import GroupModel
 from app.repositories.base import BaseRepository
 
 
-class GroupRepository(BaseRepository[Group]):
-    __model__ = Group
+class GroupRepository(BaseRepository[GroupModel]):
+    __model__ = GroupModel

@@ -1,13 +1,13 @@
-from .base import Base
-from .congratulation import Congratulation
-from .group import Group
-from .user import User
+from .base import BaseModel
+from .congratulation import CongratulationModel
+from .group import GroupModel
+from .user import UserModel
 from .usergrouplink import UserGroupLink
 
 __all__ = [
-    "Base",
-    "User",
+    "BaseModel",
+    "UserModel",
     "UserGroupLink",
-    "Group",
-    "Congratulation",
+    "GroupModel",
+    "CongratulationModel",
 ]

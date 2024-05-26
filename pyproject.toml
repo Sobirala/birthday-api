@@ -21,22 +21,31 @@ ruff = "^0.4.5"
 [tool.poetry.group.types.dependencies]
 mypy = "^1.10.0"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.2.1"
+pytest-asyncio = "^0.23.7"
+pytest-cov = "^5.0.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.ruff]
-lint.select = [
+[tool.ruff.lint]
+select = [
     "E",  # pycodestyle errors
     "W",  # pycodestyle warnings
     "F",  # pyflakes
     "I",  # isort
-    "C",  # flake8-comprehensions
     "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
 ]
-lint.ignore = [
+ignore = [
     "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
     "C901",  # too complex
+    "W191",  # indentation contains tabs
 ]
 
 
@@ -61,3 +70,29 @@ mypy_path = "$MYPY_CONFIG_FILE_DIR/stubs"
 init_forbid_extra = true
 init_typed = true
 warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = [
+    "tests",
+]
+filterwarnings = [
+    "error",
+    "ignore::pytest.PytestUnraisableExceptionWarning",
+]
+
+[tool.coverage.run]
+branch = false
+parallel = true
+omit = [
+    "app/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "if __name__ == .__main__.:",
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+    "@overload",
+]

@@ -3,7 +3,7 @@ from typing import Self, Type
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Base
+from app.models import BaseModel
 from app.repositories.congratulation import CongratulationRepository
 from app.repositories.group import GroupRepository
 from app.repositories.user import UserRepository
@@ -32,7 +32,7 @@ class UnitOfWork:
     async def commit(self) -> None:
         await self._session.commit()
 
-    async def delete(self, model: Base) -> None:
+    async def delete(self, model: BaseModel) -> None:
         await self._session.delete(model)
 
     async def rollback(self) -> None:

@@ -5,18 +5,18 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.base import ExecutableOption
 from sqlalchemy.sql.functions import concat
 
-from app.models import Group, User
+from app.models import GroupModel, UserModel
 from app.repositories.base import BaseRepository
 
 
-class UserRepository(BaseRepository[User]):
-    __model__ = User
+class UserRepository(BaseRepository[UserModel]):
+    __model__ = UserModel
 
-    async def get_user_in_group(self, user_id: int, chat_id: int, options: Optional[Sequence[ExecutableOption]] = None) -> Optional[User]:
-        query = select(User) \
-            .join(User.groups) \
-            .filter(Group.id == chat_id) \
-            .filter(User.id == user_id) \
+    async def get_user_in_group(self, user_id: int, chat_id: int, options: Optional[Sequence[ExecutableOption]] = None) -> Optional[UserModel]:
+        query = select(self.__model__) \
+            .join(UserModel.groups) \
+            .filter(GroupModel.id == chat_id) \
+            .filter(UserModel.id == user_id) \
             .limit(1)
 
         if options is not None:
@@ -24,8 +24,8 @@ class UserRepository(BaseRepository[User]):
 
         return (await self._session.scalars(query)).first()
 
-    async def get_birthday_persons(self, interval: int = 0) -> Sequence[User]:
-        query = select(User).options(selectinload(User.groups)).filter(self._get_filter(interval))
+    async def get_birthday_persons(self, interval: int = 0) -> Sequence[UserModel]:
+        query = select(UserModel).options(selectinload(UserModel.groups)).filter(self._get_filter(interval))
 
         return (await self._session.scalars(query)).all()
 
@@ -35,16 +35,16 @@ class UserRepository(BaseRepository[User]):
         if interval != 0:
             date += func.cast(concat(interval, ' DAYS'), Interval)  # type: ignore[assignment]
         return and_(
-            func.extract("MONTH", User.birthday) == func.extract("MONTH", date),
-            func.extract("DAY", User.birthday) == func.extract("DAY", date),
-            func.extract("HOUR", func.timezone(User.timezone, func.current_time())) == 9
+            func.extract("MONTH", UserModel.birthday) == func.extract("MONTH", date),
+            func.extract("DAY", UserModel.birthday) == func.extract("DAY", date),
+            func.extract("HOUR", func.timezone(UserModel.timezone, func.current_time())) == 9
         )
 
-    async def get_birthday_group_users(self, birthday_id: int, group_id: int) -> Sequence[User]:
-        query = select(User) \
-                .select_from(Group) \
-                .join(Group.users) \
-                .filter(Group.id == group_id) \
-                .filter(User.id != birthday_id)
+    async def get_birthday_group_users(self, birthday_id: int, group_id: int) -> Sequence[UserModel]:
+        query = select(UserModel) \
+                .select_from(GroupModel) \
+                .join(GroupModel.users) \
+                .filter(GroupModel.id == group_id) \
+                .filter(UserModel.id != birthday_id)
 
         return (await self._session.scalars(query)).all()
