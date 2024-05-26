@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/install
       - name: Run tests
         run: |
-          poetry run pytest --cov app --cov-config .coveragerc --cov-report=xml
+          poetry run pytest --cov birthday-api --cov-config .coveragerc --cov-report=xml
       - name: Upload coverage data
         uses: codecov/codecov-action@v4
         with:
