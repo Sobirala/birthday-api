@@ -1,10 +1,8 @@
 from typing import Optional, Sequence
 
-from sqlalchemy import ColumnElement, Interval, and_, func, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.base import ExecutableOption
-from sqlalchemy.sql.functions import concat
 
 from app.models import GroupModel, UserModel
 from app.repositories.base import BaseRepository
