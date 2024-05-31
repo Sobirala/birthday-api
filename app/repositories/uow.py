@@ -18,16 +18,15 @@ class UnitOfWork:
 
     def __init__(self, session: AsyncSession):
         self._session = session
-
-    async def __aenter__(self) -> Self:
         self.users = UserRepository(self._session)
         self.groups = GroupRepository(self._session)
         self.congratulations = CongratulationRepository(self._session)
 
+    async def __aenter__(self) -> Self:
         return self
 
     async def __aexit__(self, exc_type: Type[BaseException], exc_val: BaseException, exc_tb: TracebackType) -> None:
-        ...
+        await self.commit()
 
     async def commit(self) -> None:
         await self._session.commit()

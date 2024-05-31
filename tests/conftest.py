@@ -1,10 +1,27 @@
-from unittest.mock import AsyncMock
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
+from sqlalchemy import ScalarResult
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Mapped
+
+from app.models import BaseModel
+from app.repositories.base import BaseRepository
+
+
+class MockModel(BaseModel):
+    __tablename__ = "mock"
+    id: Mapped[int]
 
 
 @pytest.fixture
-def session_mock():
-    return AsyncMock(spec=AsyncSession)
+def mock_session():
+    mock_session = AsyncMock(AsyncSession)
+    mock_session.scalars.return_value = MagicMock(ScalarResult)
+    return mock_session
+
+
+@pytest.fixture
+def base_repository(mock_session):
+    return BaseRepository(MockModel, mock_session)
 

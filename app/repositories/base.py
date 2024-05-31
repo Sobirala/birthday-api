@@ -23,8 +23,10 @@ Model = TypeVar('Model', bound=BaseModel)
 
 class BaseRepository(Generic[Model]):
     __model__: Type[Model]
+    __session: AsyncSession
 
-    def __init__(self, session: AsyncSession):
+    def __init__(self, model: Type[Model], session: AsyncSession):
+        self.__model__ = model
         self._session = session
 
     async def get_count(self, *expressions: BinaryExpression[Any] | ColumnOperators) -> Optional[int]:
