@@ -1,4 +1,4 @@
-async def test_settings(settings):
+def test_settings(settings):
     assert settings.POSTGRES_HOST == 'localhost'
     assert settings.POSTGRES_PORT == 5432
     assert settings.POSTGRES_USER == 'postgres'
