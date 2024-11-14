@@ -20,7 +20,7 @@ jobs:
         run: |
           poetry run pytest --cov app --cov-config .coveragerc --cov-report=xml
       - name: Upload coverage data
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.xml
