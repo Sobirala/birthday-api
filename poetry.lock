@@ -21,18 +21,18 @@ tz = ["backports.zoneinfo"]
 
 [[package]]
 name = "alembic-postgresql-enum"
-version = "1.2.0"
+version = "1.10.0"
 description = "Alembic autogenerate support for creation, alteration and deletion of enums"
 optional = false
-python-versions = "<4.0,>=3.7"
+python-versions = ">=3.7.0"
 files = [
-    {file = "alembic_postgresql_enum-1.2.0-py3-none-any.whl", hash = "sha256:bd156e882a10c680fc88ebad25cfe78ccf9f826dec89670f8aeb28e5359e502b"},
-    {file = "alembic_postgresql_enum-1.2.0.tar.gz", hash = "sha256:971bd3a4c35ea38869bb5e263ea79e5b4a9c4a02f174a3dd7ddcb29d41260cba"},
+    {file = "alembic_postgresql_enum-1.10.0-py3-none-any.whl", hash = "sha256:39297cb5dc0e71a3e08df1feeab9ffcc1b6aac0be02bf578748d74c442cd3fbf"},
+    {file = "alembic_postgresql_enum-1.10.0.tar.gz", hash = "sha256:ea23481de3d6a00d68d369f92a46ff4fa27b2575e39c583145f1e23ea9c7511d"},
 ]
 
 [package.dependencies]
 alembic = ">=1.7"
-SQLAlchemy = ">=1.4"
+sqlalchemy = ">=1.4"
 
 [[package]]
 name = "annotated-types"
